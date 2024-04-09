@@ -2,9 +2,9 @@
 {
     public class Category
     {
-        public Guid id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public bool IsActive { get; set; }
-        public string? description { get; set; }
+        public string? Description { get; set; }
         public string? ImageURL { get; set; }
 
 

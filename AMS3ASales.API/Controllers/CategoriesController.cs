@@ -24,5 +24,26 @@ namespace AMS3ASales.API.Controllers
         {
             return Ok(_context.Category.ToList());
         }
+        [HttpGet("{id}")]
+        public ActionResult<Category> GetById(Guid id) 
+        {
+            var category = _context.Category.FirstOrDefault(x => x.Id == id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(category);
+        }
+        
+        [HttpPost]
+        public ActionResult Post(Category category) 
+        { 
+            _context.Category.Add(category);
+            _context.SaveChanges();
+            
+            return Ok();
+        }
     }
 }

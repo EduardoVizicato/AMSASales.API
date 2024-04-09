@@ -2,10 +2,10 @@
 {
     public class Product
     {
-        public Guid id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string? Description { get; set; }
-        public double stock { get; set; }
-        public double price { get; set; }
+        public double Stock { get; set; }
+        public double Price { get; set; }
         public string? ImageURL { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreateDate { get; set; }
