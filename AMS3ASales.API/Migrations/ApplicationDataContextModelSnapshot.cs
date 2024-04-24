@@ -19,8 +19,11 @@ namespace AMS3ASales.API.Migrations
 
             modelBuilder.Entity("AMS3ASales.API.Domain.Category", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageURL")
@@ -29,18 +32,18 @@ namespace AMS3ASales.API.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("description")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("Category");
                 });
 
             modelBuilder.Entity("AMS3ASales.API.Domain.Product", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreateDate")
@@ -55,15 +58,29 @@ namespace AMS3ASales.API.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("price")
+                    b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("stock")
+                    b.Property<double>("Stock")
                         .HasColumnType("REAL");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("AMS3ASales.API.Domain.Product", b =>
+                {
+                    b.HasOne("AMS3ASales.API.Domain.Category", null)
+                        .WithMany("Product")
+                        .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("AMS3ASales.API.Domain.Category", b =>
+                {
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
